@@ -136,6 +136,7 @@
             txtBoxVolumeInUnits.ReadOnly = true;
             txtBoxVolumeInUnits.Size = new Size(76, 25);
             txtBoxVolumeInUnits.TabIndex = 4;
+            txtBoxVolumeInUnits.TabStop = false;
             txtBoxVolumeInUnits.TextAlign = HorizontalAlignment.Right;
             // 
             // label8
@@ -154,7 +155,7 @@
             nudNumPositions.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudNumPositions.Name = "nudNumPositions";
             nudNumPositions.Size = new Size(76, 25);
-            nudNumPositions.TabIndex = 3;
+            nudNumPositions.TabIndex = 5;
             nudNumPositions.TextAlign = HorizontalAlignment.Right;
             nudNumPositions.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudNumPositions.ValueChanged += nudNumPositions_ValueChanged;
@@ -177,7 +178,7 @@
             nudTPStep.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudTPStep.Name = "nudTPStep";
             nudTPStep.Size = new Size(76, 25);
-            nudTPStep.TabIndex = 2;
+            nudTPStep.TabIndex = 4;
             nudTPStep.TextAlign = HorizontalAlignment.Right;
             nudTPStep.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudTPStep.ValueChanged += nudTPStep_ValueChanged;
@@ -223,7 +224,7 @@
             nudSL.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudSL.Name = "nudSL";
             nudSL.Size = new Size(76, 25);
-            nudSL.TabIndex = 1;
+            nudSL.TabIndex = 3;
             nudSL.TextAlign = HorizontalAlignment.Right;
             nudSL.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudSL.ValueChanged += nudSL_ValueChanged;
@@ -287,7 +288,7 @@
             checkBoxTrailAfterBreakEven.Location = new Point(9, 83);
             checkBoxTrailAfterBreakEven.Name = "checkBoxTrailAfterBreakEven";
             checkBoxTrailAfterBreakEven.Size = new Size(154, 20);
-            checkBoxTrailAfterBreakEven.TabIndex = 15;
+            checkBoxTrailAfterBreakEven.TabIndex = 11;
             checkBoxTrailAfterBreakEven.Text = "Only Trail after BE";
             checkBoxTrailAfterBreakEven.CheckedChanged += checkBoxTrailAfterBreakEven_CheckedChanged_1;
             // 
@@ -300,7 +301,7 @@
             nudTrailPaddingPips.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudTrailPaddingPips.Name = "nudTrailPaddingPips";
             nudTrailPaddingPips.Size = new Size(76, 25);
-            nudTrailPaddingPips.TabIndex = 16;
+            nudTrailPaddingPips.TabIndex = 10;
             nudTrailPaddingPips.TextAlign = HorizontalAlignment.Right;
             // 
             // label9
@@ -320,7 +321,7 @@
             nudCandleTrail.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudCandleTrail.Name = "nudCandleTrail";
             nudCandleTrail.Size = new Size(44, 25);
-            nudCandleTrail.TabIndex = 10;
+            nudCandleTrail.TabIndex = 12;
             nudCandleTrail.TextAlign = HorizontalAlignment.Right;
             nudCandleTrail.Value = new decimal(new int[] { 5, 0, 0, 0 });
             nudCandleTrail.ValueChanged += nudCandleTrail_ValueChanged;
@@ -343,7 +344,7 @@
             nubBEAfter.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nubBEAfter.Name = "nubBEAfter";
             nubBEAfter.Size = new Size(66, 25);
-            nubBEAfter.TabIndex = 4;
+            nubBEAfter.TabIndex = 7;
             nubBEAfter.TextAlign = HorizontalAlignment.Right;
             nubBEAfter.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nubBEAfter.ValueChanged += nubBEAfter_ValueChanged;
@@ -356,7 +357,7 @@
             checkBoxAutoBreakEven.Location = new Point(9, 23);
             checkBoxAutoBreakEven.Name = "checkBoxAutoBreakEven";
             checkBoxAutoBreakEven.Size = new Size(101, 21);
-            checkBoxAutoBreakEven.TabIndex = 14;
+            checkBoxAutoBreakEven.TabIndex = 6;
             checkBoxAutoBreakEven.Text = "Auto BE past";
             checkBoxAutoBreakEven.UseVisualStyleBackColor = true;
             checkBoxAutoBreakEven.CheckedChanged += checkBoxAutoBreakEven_CheckedChanged;
@@ -371,7 +372,7 @@
             nudPipsPadding.Minimum = new decimal(new int[] { 5, 0, 0, 65536 });
             nudPipsPadding.Name = "nudPipsPadding";
             nudPipsPadding.Size = new Size(76, 25);
-            nudPipsPadding.TabIndex = 3;
+            nudPipsPadding.TabIndex = 8;
             nudPipsPadding.TextAlign = HorizontalAlignment.Right;
             nudPipsPadding.Value = new decimal(new int[] { 5, 0, 0, 65536 });
             // 
@@ -437,7 +438,7 @@
             nudCloseOnGainPerc.Margin = new Padding(3, 2, 3, 2);
             nudCloseOnGainPerc.Name = "nudCloseOnGainPerc";
             nudCloseOnGainPerc.Size = new Size(67, 25);
-            nudCloseOnGainPerc.TabIndex = 8;
+            nudCloseOnGainPerc.TabIndex = 24;
             nudCloseOnGainPerc.TextAlign = HorizontalAlignment.Right;
             // 
             // btnHedge
@@ -448,7 +449,7 @@
             btnHedge.Margin = new Padding(3, 2, 3, 2);
             btnHedge.Name = "btnHedge";
             btnHedge.Size = new Size(163, 26);
-            btnHedge.TabIndex = 16;
+            btnHedge.TabIndex = 23;
             btnHedge.Text = "Hedge";
             btnHedge.UseVisualStyleBackColor = false;
             btnHedge.Click += btnHedge_Click;
@@ -460,7 +461,7 @@
             btnSyncTP.Margin = new Padding(3, 2, 3, 2);
             btnSyncTP.Name = "btnSyncTP";
             btnSyncTP.Size = new Size(76, 26);
-            btnSyncTP.TabIndex = 15;
+            btnSyncTP.TabIndex = 21;
             btnSyncTP.Text = "Sync TP";
             btnSyncTP.UseVisualStyleBackColor = false;
             btnSyncTP.Click += btnSyncTP_Click;
@@ -472,7 +473,7 @@
             btnResetTP.Margin = new Padding(3, 2, 3, 2);
             btnResetTP.Name = "btnResetTP";
             btnResetTP.Size = new Size(76, 26);
-            btnResetTP.TabIndex = 14;
+            btnResetTP.TabIndex = 19;
             btnResetTP.Text = "Reset TP";
             btnResetTP.UseVisualStyleBackColor = false;
             btnResetTP.Click += btnResetTP_Click;
@@ -485,7 +486,7 @@
             btnCloseAll.Margin = new Padding(3, 2, 3, 2);
             btnCloseAll.Name = "btnCloseAll";
             btnCloseAll.Size = new Size(166, 56);
-            btnCloseAll.TabIndex = 11;
+            btnCloseAll.TabIndex = 17;
             btnCloseAll.Text = "CLOSE ALL";
             btnCloseAll.UseVisualStyleBackColor = false;
             btnCloseAll.Click += BtnCloseAll_Click;
@@ -497,7 +498,7 @@
             btnSyncSL.Margin = new Padding(3, 2, 3, 2);
             btnSyncSL.Name = "btnSyncSL";
             btnSyncSL.Size = new Size(81, 26);
-            btnSyncSL.TabIndex = 6;
+            btnSyncSL.TabIndex = 20;
             btnSyncSL.Text = "Sync SL";
             btnSyncSL.UseVisualStyleBackColor = false;
             btnSyncSL.Click += BtnSyncSL_Click;
@@ -509,7 +510,7 @@
             btnSell.Margin = new Padding(3, 2, 3, 2);
             btnSell.Name = "btnSell";
             btnSell.Size = new Size(76, 26);
-            btnSell.TabIndex = 3;
+            btnSell.TabIndex = 16;
             btnSell.Text = "SELL";
             btnSell.UseVisualStyleBackColor = false;
             btnSell.Click += BtnSell_Click;
@@ -521,7 +522,7 @@
             btnResetSL.Margin = new Padding(3, 2, 3, 2);
             btnResetSL.Name = "btnResetSL";
             btnResetSL.Size = new Size(81, 26);
-            btnResetSL.TabIndex = 5;
+            btnResetSL.TabIndex = 18;
             btnResetSL.Text = "Reset SL";
             btnResetSL.UseVisualStyleBackColor = false;
             btnResetSL.Click += btnResetSL_Click;
@@ -533,7 +534,7 @@
             previewSell.Margin = new Padding(3, 2, 3, 2);
             previewSell.Name = "previewSell";
             previewSell.Size = new Size(83, 26);
-            previewSell.TabIndex = 1;
+            previewSell.TabIndex = 15;
             previewSell.Text = "Preview";
             previewSell.UseVisualStyleBackColor = false;
             previewSell.Click += previewSell_Click;
@@ -546,7 +547,7 @@
             btnBreakEven.Margin = new Padding(3, 2, 3, 2);
             btnBreakEven.Name = "btnBreakEven";
             btnBreakEven.Size = new Size(166, 56);
-            btnBreakEven.TabIndex = 7;
+            btnBreakEven.TabIndex = 22;
             btnBreakEven.Text = "Break Even";
             btnBreakEven.UseVisualStyleBackColor = false;
             btnBreakEven.Click += BtnBreakEven_Click;
@@ -558,7 +559,7 @@
             previewBuy.Margin = new Padding(3, 2, 3, 2);
             previewBuy.Name = "previewBuy";
             previewBuy.Size = new Size(84, 26);
-            previewBuy.TabIndex = 2;
+            previewBuy.TabIndex = 13;
             previewBuy.Text = "Preview";
             previewBuy.UseVisualStyleBackColor = false;
             previewBuy.Click += previewBuy_Click;
@@ -570,7 +571,7 @@
             btnBuy.Margin = new Padding(3, 2, 3, 2);
             btnBuy.Name = "btnBuy";
             btnBuy.Size = new Size(76, 26);
-            btnBuy.TabIndex = 4;
+            btnBuy.TabIndex = 14;
             btnBuy.Text = "BUY";
             btnBuy.UseVisualStyleBackColor = false;
             btnBuy.Click += BtnBuy_Click;
@@ -653,10 +654,10 @@
             // tabPage2
             // 
             tabPage2.Controls.Add(groupBox4);
-            tabPage2.Location = new Point(4, 26);
+            tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(382, 446);
+            tabPage2.Size = new Size(382, 448);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
             tabPage2.UseVisualStyleBackColor = true;

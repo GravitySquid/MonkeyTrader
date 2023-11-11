@@ -279,14 +279,14 @@ namespace cAlgo
             _robot.BeginInvokeOnMainThread(() =>
             {
                 double stopLossPips = (double)nudSL.Value;
-                double takeProfitPips = (double)nudTPStep.Value;
                 double newSL;
 
                 RefreshTrail();
 
                 foreach (var position in _robot.Positions)
                 {
-                    if (position.SymbolName == _robot.Symbol.Name && (position.Label == txtBotLabel.Text || checkBoxManageAllPos.Checked))
+                    if (position.SymbolName == _robot.Symbol.Name && (position.Label == txtBotLabel.Text || checkBoxManageAllPos.Checked)
+                        && position.StopLoss > 0)
                     {
                         if (position.TradeType == TradeType.Sell)
                         {
@@ -442,7 +442,8 @@ namespace cAlgo
 
                 foreach (var position in _robot.Positions)
                 {
-                    if (position.SymbolName == _robot.Symbol.Name && (position.Label == txtBotLabel.Text || checkBoxManageAllPos.Checked))
+                    if (position.SymbolName == _robot.Symbol.Name && (position.Label == txtBotLabel.Text || checkBoxManageAllPos.Checked)
+                        && position.TakeProfit != null && position.TakeProfit > 0)
                     {
                         if (position.TradeType == TradeType.Sell)
                         {

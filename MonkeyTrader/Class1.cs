@@ -342,6 +342,7 @@ namespace cAlgo.Robots
                 }
             }
         }
+
         public void SyncSL()
         {
             string tLabel = _mainForm.Controls.Find("txtBotLabel", true)[0].Text;
@@ -354,15 +355,17 @@ namespace cAlgo.Robots
 
             foreach (Position p in Positions)
             {
-                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotSL))
+                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotSL)
+                    && p.StopLoss != null && p.StopLoss != 0)
                 {
-                    if (p.TradeType == TradeType.Buy && p.StopLoss != null && p.StopLoss > highestBuySL) highestBuySL = (double)p.StopLoss;
-                    if (p.TradeType == TradeType.Sell && p.StopLoss != null && p.StopLoss < lowestSellSL) lowestSellSL = (double)p.StopLoss;
+                    if (p.TradeType == TradeType.Buy && p.StopLoss > highestBuySL) highestBuySL = (double)p.StopLoss;
+                    if (p.TradeType == TradeType.Sell && p.StopLoss < lowestSellSL) lowestSellSL = (double)p.StopLoss;
                 }
             }
             foreach (Position p in Positions)
             {
-                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotSL))
+                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotSL)
+                    && p.StopLoss != null && p.StopLoss != 0)
                 {
                     if (p.TradeType == TradeType.Buy)
                     {
@@ -389,15 +392,17 @@ namespace cAlgo.Robots
 
             foreach (Position p in Positions)
             {
-                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotTP))
+                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotTP)
+                    && p.TakeProfit != null && p.TakeProfit != 0)
                 {
-                    if (p.TradeType == TradeType.Buy && p.TakeProfit != null && p.TakeProfit < lowestBuyTP) lowestBuyTP = (double)p.TakeProfit;
-                    if (p.TradeType == TradeType.Sell && p.TakeProfit != null && p.TakeProfit > highestSellTP) highestSellTP = (double)p.TakeProfit;
+                    if (p.TradeType == TradeType.Buy && p.TakeProfit < lowestBuyTP) lowestBuyTP = (double)p.TakeProfit;
+                    if (p.TradeType == TradeType.Sell && p.TakeProfit > highestSellTP) highestSellTP = (double)p.TakeProfit;
                 }
             }
             foreach (Position p in Positions)
             {
-                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotTP))
+                if (p.SymbolName == Symbol.Name && (p.Label == tLabel || changeNonBotTP)
+                    && p.TakeProfit != null && p.TakeProfit != 0)
                 {
                     if (p.TradeType == TradeType.Buy)
                     {
