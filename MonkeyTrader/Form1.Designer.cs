@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             groupBox1 = new GroupBox();
             txtBoxVolumeInUnits = new TextBox();
             label8 = new Label();
@@ -80,6 +81,8 @@
             tabPage3 = new TabPage();
             groupBox7 = new GroupBox();
             richTextBoxAboutInfo = new RichTextBox();
+            groupBox6 = new GroupBox();
+            txtMargin = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudNumPositions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudTPStep).BeginInit();
@@ -100,6 +103,7 @@
             groupBox4.SuspendLayout();
             tabPage3.SuspendLayout();
             groupBox7.SuspendLayout();
+            groupBox6.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -608,22 +612,22 @@
             groupBox5.BackColor = SystemColors.Window;
             groupBox5.Controls.Add(txtStatus);
             groupBox5.FlatStyle = FlatStyle.System;
-            groupBox5.Location = new Point(7, 486);
+            groupBox5.Location = new Point(109, 486);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(382, 56);
+            groupBox5.Size = new Size(284, 52);
             groupBox5.TabIndex = 4;
             groupBox5.TabStop = false;
-            groupBox5.Text = "Status";
+            groupBox5.Text = "Gain";
             // 
             // txtStatus
             // 
             txtStatus.BackColor = SystemColors.Window;
             txtStatus.BorderStyle = BorderStyle.None;
             txtStatus.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtStatus.Location = new Point(6, 24);
+            txtStatus.Location = new Point(6, 20);
             txtStatus.Name = "txtStatus";
             txtStatus.ReadOnly = true;
-            txtStatus.Size = new Size(366, 20);
+            txtStatus.Size = new Size(274, 20);
             txtStatus.TabIndex = 0;
             txtStatus.TextAlign = HorizontalAlignment.Right;
             // 
@@ -722,15 +726,41 @@
             richTextBoxAboutInfo.TabIndex = 11;
             richTextBoxAboutInfo.Text = "";
             // 
+            // groupBox6
+            // 
+            groupBox6.BackColor = SystemColors.Window;
+            groupBox6.Controls.Add(txtMargin);
+            groupBox6.FlatStyle = FlatStyle.System;
+            groupBox6.Location = new Point(3, 486);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(100, 52);
+            groupBox6.TabIndex = 5;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Margin";
+            // 
+            // txtMargin
+            // 
+            txtMargin.BackColor = SystemColors.Window;
+            txtMargin.BorderStyle = BorderStyle.None;
+            txtMargin.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtMargin.Location = new Point(10, 20);
+            txtMargin.Name = "txtMargin";
+            txtMargin.ReadOnly = true;
+            txtMargin.Size = new Size(84, 20);
+            txtMargin.TabIndex = 0;
+            txtMargin.TextAlign = HorizontalAlignment.Right;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(396, 550);
+            ClientSize = new Size(396, 542);
+            Controls.Add(groupBox6);
             Controls.Add(tabControl);
             Controls.Add(groupBox5);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "MONKEY TRADER";
@@ -759,6 +789,8 @@
             groupBox4.PerformLayout();
             tabPage3.ResumeLayout(false);
             groupBox7.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -815,5 +847,7 @@
         private Button btnHedge;
         private Label label11;
         private NumericUpDown nudCloseOnGainPerc;
+        private GroupBox groupBox6;
+        private TextBox txtMargin;
     }
 }

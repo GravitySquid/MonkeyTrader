@@ -441,7 +441,7 @@ namespace cAlgo
                 foreach (var position in _robot.Positions)
                 {
                     if (position.SymbolName == _robot.Symbol.Name && (position.Label == txtBotLabel.Text || checkBoxManageAllPos.Checked)
-                        && position.TakeProfit != null && position.TakeProfit > 0)
+                        && position.TakeProfit > 0)
                     {
                         if (position.TradeType == TradeType.Sell)
                         {

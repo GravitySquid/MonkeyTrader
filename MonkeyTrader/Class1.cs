@@ -30,7 +30,7 @@ namespace cAlgo.Robots
     public class MonkeyTrader : Robot
     {
 
-        [Parameter("Manage All Positions", DefaultValue = true, Group ="General Settings")]
+        [Parameter("Manage All Positions", DefaultValue = true, Group = "General Settings")]
         public bool ManageAllPos { get; set; }
 
         [Parameter("Preview before Trade", DefaultValue = false, Group = "General Settings")]
@@ -42,7 +42,10 @@ namespace cAlgo.Robots
         [Parameter("Gain % Close", DefaultValue = 5.0, Group = "General Settings")]
         public double GainClosePerc { get; set; }
 
-        [Parameter("Max Risk %", DefaultValue = 1.00, MinValue = 0.01, Group ="Positions")]
+        [Parameter("Account Margin Warning Level", DefaultValue = 1000.0, Group = "General Settings")]
+        public double MarginWarningLevel { get; set; }
+
+        [Parameter("Max Risk %", DefaultValue = 1.00, MinValue = 0.01, Group = "Positions")]
         public double MaxRisk { get; set; }
 
         [Parameter("Max Volume", DefaultValue = 1, MinValue = 1, Group = "Positions")]
@@ -74,7 +77,7 @@ namespace cAlgo.Robots
         private ExponentialMovingAverage _EMA13, _EMA20, _EMA50, _EMA100, _EMA200;
 
         public string BotVersion = "";
-        public const string Expirydate = "1/07/2024";
+        public const string Expirydate = "1/12/2024";
 
         public enum TrailType
         {
@@ -251,7 +254,7 @@ namespace cAlgo.Robots
             if (totPos > 0)
             {
                 double perc = gain / this.Account.Balance;
-                if (closeOnGainPerc > 0 && (perc * 100)  > closeOnGainPerc)
+                if (closeOnGainPerc > 0 && (perc * 100) > closeOnGainPerc)
                 {
                     foreach (var p in Positions)
                     {
@@ -259,6 +262,7 @@ namespace cAlgo.Robots
                             ClosePositionAsync(p);
                     };
                 }
+                // Status
                 string status = _liveOrBacktesting;
                 if (showDollars)
                     status += gain.ToString("C") + " / ";
@@ -270,13 +274,24 @@ namespace cAlgo.Robots
                     _mainForm.Controls.Find("txtStatus", true)[0].BackColor = System.Drawing.Color.Aquamarine;
                 if (gain < 0)
                     _mainForm.Controls.Find("txtStatus", true)[0].BackColor = System.Drawing.Color.OrangeRed;
+                // Margin
+                double margin = 0;
+                if (Account.MarginLevel != null)
+                    margin = Account.MarginLevel.Value;
+                _mainForm.Controls.Find("txtMargin", true)[0].Text = margin.ToString("N0") + "%";
+                if (Account.MarginLevel < MarginWarningLevel)
+                    _mainForm.Controls.Find("txtMargin", true)[0].BackColor = System.Drawing.Color.OrangeRed;
+                else
+                    _mainForm.Controls.Find("txtMargin", true)[0].BackColor = System.Drawing.Color.Aquamarine;
             }
             else
             {
                 _mainForm.Controls.Find("txtStatus", true)[0].Text = _liveOrBacktesting + " No Positions ";
                 _mainForm.Controls.Find("txtStatus", true)[0].BackColor = System.Drawing.Color.DarkGray;
+                _mainForm.Controls.Find("txtMargin", true)[0].Text = "N/A";
+                _mainForm.Controls.Find("txtMargin", true)[0].BackColor = System.Drawing.Color.DarkGray;
             }
-                        
+
         }
 
         private void UpdateTrail(Position pos, double lastValueBuy, double lastValueSell, double paddingPips, bool addSpread, double breakEvenAfter)
@@ -436,8 +451,8 @@ namespace cAlgo.Robots
                     numPos++;
                 }
             }
-            
-            if (numPos == 0) 
+
+            if (numPos == 0)
             {
                 Print("Nothing to Hedge - no positions.");
                 return;
@@ -449,7 +464,7 @@ namespace cAlgo.Robots
                 tradeType = TradeType.Buy;
                 netUnits = netUnits * -1;
             }
-            
+
             Print(string.Format("Open Hedging position of Size {0}", netUnits));
             ExecuteMarketOrderAsync(tradeType, Symbol.Name, netUnits, tLabel);
 
