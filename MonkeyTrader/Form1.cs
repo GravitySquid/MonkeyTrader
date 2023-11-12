@@ -6,6 +6,7 @@ using cAlgo.API;
 using System.Resources;
 using System.Xml;
 using System.Runtime.CompilerServices;
+using Color = cAlgo.API.Color;
 
 namespace cAlgo
 {
@@ -234,9 +235,6 @@ namespace cAlgo
 
             RemovePreview();
 
-            //double positionSizeForRisk = (_robot.Account.Balance * risk / 100) / (stopLossPips * _robot.Symbol.PipValue);
-            //double singlePosSize = positionSizeForRisk / numTargets;
-            //double maxUnitsSinglePos = _robot.Symbol.NormalizeVolumeInUnits((maxUnits / numTargets), RoundingMode.Down);
             int barIndexStart = _robot.Chart.Bars.Count - 15;
             int barIndexEnd = _robot.Chart.Bars.Count;
             double currentPrice = 0;
@@ -254,11 +252,11 @@ namespace cAlgo
                 currentSL = currentPrice - (stopLossPips * _robot.Symbol.PipSize);
                 currentTP = currentPrice + ((takeProfitPips * numTargets) * _robot.Symbol.PipSize);
             }
-
-            _robot.Chart.DrawRectangle("PreviewOrderEntryRect", barIndexStart, currentPrice, barIndexEnd, currentSL, API.Color.FromArgb(80, 255, 0, 0), 1).IsFilled = true;
-            _robot.Chart.DrawRectangle("PreviewOrderTPRect", barIndexStart, currentPrice, barIndexEnd, currentTP, API.Color.FromArgb(80, 0, 200, 50), 1).IsFilled = true;
-            _robot.Chart.DrawTrendLine("PreviewOrderEntry", barIndexStart, currentPrice, barIndexEnd, currentPrice, "Gold", 2);
-            _robot.Chart.DrawTrendLine("PreviewOrderSL", barIndexStart, currentSL, barIndexEnd, currentSL, "Red", 2);
+            Color colorSL = Color.DarkRed, colorTP = Color.DarkGreen, colorEntry = Color.DarkGoldenrod;
+            _robot.Chart.DrawRectangle("PreviewOrderEntryRect", barIndexStart, currentPrice, barIndexEnd, currentSL, Color.FromArgb(50, 255, 0, 0), 1).IsFilled = true;
+            _robot.Chart.DrawRectangle("PreviewOrderTPRect", barIndexStart, currentPrice, barIndexEnd, currentTP, Color.FromArgb(50, 0, 200, 50), 1).IsFilled = true;
+            _robot.Chart.DrawTrendLine("PreviewOrderEntry", barIndexStart, currentPrice, barIndexEnd, currentPrice, colorEntry, 1);
+            _robot.Chart.DrawTrendLine("PreviewOrderSL", barIndexStart, currentSL, barIndexEnd, currentSL, colorSL, 1);
 
             for (int i = 1; i <= numTargets; i++)
             {
@@ -267,7 +265,7 @@ namespace cAlgo
                     currentTP = currentPrice - (tp * _robot.Symbol.PipSize);
                 else
                     currentTP = currentPrice + (tp * _robot.Symbol.PipSize);
-                _robot.Chart.DrawTrendLine("PreviewOrderTP" + i.ToString(), barIndexStart, currentTP, barIndexEnd, currentTP, "Lime", 2);
+                _robot.Chart.DrawTrendLine("PreviewOrderTP" + i.ToString(), barIndexStart, currentTP, barIndexEnd, currentTP, colorTP, 1);
             }
             _displayingPreview = true;
             _previewTradeType = tradeType;
