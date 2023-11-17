@@ -384,7 +384,7 @@
             // 
             cboxTrailMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             cboxTrailMethod.FormattingEnabled = true;
-            cboxTrailMethod.Items.AddRange(new object[] { "No Trail", "Regular Trail", "Candle Bars Trail", "Parabolic SAR Trail", "Target Step Trail", "EMA 13 Trail", "EMA 50 Trail", "EMA 100 Trail", "EMA 200 Trail" });
+            cboxTrailMethod.Items.AddRange(new object[] { "No Trail", "Regular Trail", "Candle Bars Trail", "Parabolic SAR Trail", "Target Step Trail", "EMA 13 Trail", "EMA 20 Trail", "EMA 50 Trail", "EMA 100 Trail", "EMA 200 Trail" });
             cboxTrailMethod.Location = new Point(8, 52);
             cboxTrailMethod.Name = "cboxTrailMethod";
             cboxTrailMethod.Size = new Size(164, 25);
@@ -460,25 +460,25 @@
             // 
             // btnSyncTP
             // 
-            btnSyncTP.BackColor = Color.Aqua;
-            btnSyncTP.Location = new Point(96, 126);
+            btnSyncTP.BackColor = Color.PaleGreen;
+            btnSyncTP.Location = new Point(96, 96);
             btnSyncTP.Margin = new Padding(3, 2, 3, 2);
             btnSyncTP.Name = "btnSyncTP";
             btnSyncTP.Size = new Size(76, 26);
             btnSyncTP.TabIndex = 21;
-            btnSyncTP.Text = "Sync TP";
+            btnSyncTP.Text = "TP Sync";
             btnSyncTP.UseVisualStyleBackColor = false;
             btnSyncTP.Click += btnSyncTP_Click;
             // 
             // btnResetTP
             // 
-            btnResetTP.BackColor = Color.Aqua;
-            btnResetTP.Location = new Point(96, 96);
+            btnResetTP.BackColor = Color.PaleGreen;
+            btnResetTP.Location = new Point(8, 96);
             btnResetTP.Margin = new Padding(3, 2, 3, 2);
             btnResetTP.Name = "btnResetTP";
-            btnResetTP.Size = new Size(76, 26);
+            btnResetTP.Size = new Size(82, 26);
             btnResetTP.TabIndex = 19;
-            btnResetTP.Text = "Reset TP";
+            btnResetTP.Text = "TP Reset";
             btnResetTP.UseVisualStyleBackColor = false;
             btnResetTP.Click += btnResetTP_Click;
             // 
@@ -497,13 +497,13 @@
             // 
             // btnSyncSL
             // 
-            btnSyncSL.BackColor = Color.Aqua;
-            btnSyncSL.Location = new Point(9, 126);
+            btnSyncSL.BackColor = Color.Pink;
+            btnSyncSL.Location = new Point(96, 126);
             btnSyncSL.Margin = new Padding(3, 2, 3, 2);
             btnSyncSL.Name = "btnSyncSL";
-            btnSyncSL.Size = new Size(81, 26);
+            btnSyncSL.Size = new Size(76, 26);
             btnSyncSL.TabIndex = 20;
-            btnSyncSL.Text = "Sync SL";
+            btnSyncSL.Text = "SL Sync";
             btnSyncSL.UseVisualStyleBackColor = false;
             btnSyncSL.Click += BtnSyncSL_Click;
             // 
@@ -521,13 +521,13 @@
             // 
             // btnResetSL
             // 
-            btnResetSL.BackColor = Color.Aqua;
-            btnResetSL.Location = new Point(9, 96);
+            btnResetSL.BackColor = Color.Pink;
+            btnResetSL.Location = new Point(9, 126);
             btnResetSL.Margin = new Padding(3, 2, 3, 2);
             btnResetSL.Name = "btnResetSL";
             btnResetSL.Size = new Size(81, 26);
             btnResetSL.TabIndex = 18;
-            btnResetSL.Text = "Reset SL";
+            btnResetSL.Text = "SL Reset";
             btnResetSL.UseVisualStyleBackColor = false;
             btnResetSL.Click += btnResetSL_Click;
             // 
@@ -629,6 +629,7 @@
             txtStatus.ReadOnly = true;
             txtStatus.Size = new Size(274, 20);
             txtStatus.TabIndex = 0;
+            txtStatus.TabStop = false;
             txtStatus.TextAlign = HorizontalAlignment.Right;
             // 
             // tabControl
@@ -748,6 +749,7 @@
             txtMargin.ReadOnly = true;
             txtMargin.Size = new Size(84, 20);
             txtMargin.TabIndex = 0;
+            txtMargin.TabStop = false;
             txtMargin.TextAlign = HorizontalAlignment.Right;
             // 
             // Form1

@@ -31,7 +31,7 @@ namespace cAlgo
 
             if (_robot.IsBacktesting)
                 _liveOrBacktesting = " - BACKTEST";
-            this.Text += " - " + _robot.Symbol.Name + _liveOrBacktesting;
+            this.Text += " - " + _robot.Symbol.Name + _robot.Chart.TimeFrame.ToString() + _liveOrBacktesting;
             txtBotLabel.Text = "MT-" + _robot.Symbol.Name + "-001";
             nudMaxRisk.Value = 1.0M;
             this.cboxTrailMethod.Text = _trailValues[0];
@@ -66,6 +66,8 @@ namespace cAlgo
                 nudMaxUnits.Value = (decimal)CalculatePositionSize(1, (double)nudSL.Value, (double)nudMaxRisk.Value * 2, _robot.Symbol.VolumeInUnitsMin * 50);
             else
                 nudMaxUnits.Value = (decimal)_robot.Symbol.NormalizeVolumeInUnits(_robot.MaxVolume);
+            if ((double)nudMaxUnits.Value > _robot.Symbol.VolumeInUnitsMax)
+                nudMaxUnits.Value = (decimal)_robot.Symbol.VolumeInUnitsMax;
 
             RefreshPositionUnits();
             this.ActiveControl = nudMaxRisk;
