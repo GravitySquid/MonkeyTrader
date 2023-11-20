@@ -67,9 +67,6 @@
             btnBreakEven = new Button();
             previewBuy = new Button();
             btnBuy = new Button();
-            checkBoxManageAllPos = new CheckBox();
-            label7 = new Label();
-            txtBotLabel = new TextBox();
             groupBox5 = new GroupBox();
             txtStatus = new TextBox();
             tabControl = new TabControl();
@@ -78,6 +75,9 @@
             groupBox4 = new GroupBox();
             checkBoxShowDollars = new CheckBox();
             checkBoxMustPreview = new CheckBox();
+            label7 = new Label();
+            txtBotLabel = new TextBox();
+            checkBoxManageAllPos = new CheckBox();
             tabPage3 = new TabPage();
             groupBox7 = new GroupBox();
             richTextBoxAboutInfo = new RichTextBox();
@@ -192,7 +192,7 @@
             nudMaxUnits.Increment = new decimal(new int[] { 1000, 0, 0, 0 });
             nudMaxUnits.Location = new Point(277, 18);
             nudMaxUnits.Margin = new Padding(3, 2, 3, 2);
-            nudMaxUnits.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            nudMaxUnits.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             nudMaxUnits.Minimum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudMaxUnits.Name = "nudMaxUnits";
             nudMaxUnits.Size = new Size(76, 25);
@@ -342,6 +342,7 @@
             // nubBEAfter
             // 
             nubBEAfter.DecimalPlaces = 1;
+            nubBEAfter.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
             nubBEAfter.Location = new Point(106, 22);
             nubBEAfter.Margin = new Padding(3, 2, 3, 2);
             nubBEAfter.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
@@ -438,7 +439,7 @@
             // 
             nudCloseOnGainPerc.DecimalPlaces = 2;
             nudCloseOnGainPerc.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nudCloseOnGainPerc.Location = new Point(277, 170);
+            nudCloseOnGainPerc.Location = new Point(286, 170);
             nudCloseOnGainPerc.Margin = new Padding(3, 2, 3, 2);
             nudCloseOnGainPerc.Name = "nudCloseOnGainPerc";
             nudCloseOnGainPerc.Size = new Size(67, 25);
@@ -580,33 +581,6 @@
             btnBuy.UseVisualStyleBackColor = false;
             btnBuy.Click += BtnBuy_Click;
             // 
-            // checkBoxManageAllPos
-            // 
-            checkBoxManageAllPos.Checked = true;
-            checkBoxManageAllPos.CheckState = CheckState.Checked;
-            checkBoxManageAllPos.Location = new Point(6, 61);
-            checkBoxManageAllPos.Name = "checkBoxManageAllPos";
-            checkBoxManageAllPos.Size = new Size(234, 20);
-            checkBoxManageAllPos.TabIndex = 6;
-            checkBoxManageAllPos.Text = "Manage All Positions";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(6, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(62, 17);
-            label7.TabIndex = 4;
-            label7.Text = "Bot Label";
-            // 
-            // txtBotLabel
-            // 
-            txtBotLabel.Location = new Point(83, 28);
-            txtBotLabel.Margin = new Padding(3, 2, 3, 2);
-            txtBotLabel.Name = "txtBotLabel";
-            txtBotLabel.Size = new Size(117, 25);
-            txtBotLabel.TabIndex = 5;
-            // 
             // groupBox5
             // 
             groupBox5.BackColor = SystemColors.Window;
@@ -676,7 +650,7 @@
             groupBox4.Controls.Add(checkBoxManageAllPos);
             groupBox4.Location = new Point(6, 6);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(360, 149);
+            groupBox4.Size = new Size(370, 149);
             groupBox4.TabIndex = 8;
             groupBox4.TabStop = false;
             groupBox4.Text = "Bot General";
@@ -697,6 +671,33 @@
             checkBoxMustPreview.TabIndex = 7;
             checkBoxMustPreview.Text = "Must Preview Before Trade";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(6, 31);
+            label7.Name = "label7";
+            label7.Size = new Size(62, 17);
+            label7.TabIndex = 4;
+            label7.Text = "Bot Label";
+            // 
+            // txtBotLabel
+            // 
+            txtBotLabel.Location = new Point(83, 28);
+            txtBotLabel.Margin = new Padding(3, 2, 3, 2);
+            txtBotLabel.Name = "txtBotLabel";
+            txtBotLabel.Size = new Size(117, 25);
+            txtBotLabel.TabIndex = 5;
+            // 
+            // checkBoxManageAllPos
+            // 
+            checkBoxManageAllPos.Checked = true;
+            checkBoxManageAllPos.CheckState = CheckState.Checked;
+            checkBoxManageAllPos.Location = new Point(6, 61);
+            checkBoxManageAllPos.Name = "checkBoxManageAllPos";
+            checkBoxManageAllPos.Size = new Size(234, 20);
+            checkBoxManageAllPos.TabIndex = 6;
+            checkBoxManageAllPos.Text = "Manage All Positions";
+            // 
             // tabPage3
             // 
             tabPage3.Controls.Add(groupBox7);
@@ -712,7 +713,7 @@
             groupBox7.Controls.Add(richTextBoxAboutInfo);
             groupBox7.Location = new Point(3, 3);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(366, 322);
+            groupBox7.Size = new Size(374, 440);
             groupBox7.TabIndex = 12;
             groupBox7.TabStop = false;
             groupBox7.Text = "About";
@@ -723,7 +724,7 @@
             richTextBoxAboutInfo.Location = new Point(6, 24);
             richTextBoxAboutInfo.Name = "richTextBoxAboutInfo";
             richTextBoxAboutInfo.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBoxAboutInfo.Size = new Size(354, 292);
+            richTextBoxAboutInfo.Size = new Size(362, 410);
             richTextBoxAboutInfo.TabIndex = 11;
             richTextBoxAboutInfo.Text = "";
             // 
@@ -816,12 +817,9 @@
         private Button btnBreakEven;
         private Button btnSell;
         private Button btnBuy;
-        private Label label7;
-        private TextBox txtBotLabel;
         private Button btnSyncSL;
         private GroupBox groupBox5;
         private TextBox txtStatus;
-        private CheckBox checkBoxManageAllPos;
         private Button previewBuy;
         private Button previewSell;
         private TextBox txtBoxVolumeInUnits;
@@ -830,10 +828,8 @@
         private TabControl tabControl;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private GroupBox groupBox4;
         private NumericUpDown nubBEAfter;
         private ComboBox cboxTrailMethod;
-        private CheckBox checkBoxMustPreview;
         private Label label9;
         private NumericUpDown nudCandleTrail;
         private CheckBox checkBoxTrailAfterBreakEven;
@@ -841,15 +837,20 @@
         private TabPage tabPage3;
         private GroupBox groupBox7;
         private RichTextBox richTextBoxAboutInfo;
-        private CheckBox checkBoxShowDollars;
         private NumericUpDown nudTrailPaddingPips;
         private Label label10;
         private Button btnSyncTP;
         private Button btnResetTP;
         private Button btnHedge;
-        private Label label11;
         private NumericUpDown nudCloseOnGainPerc;
         private GroupBox groupBox6;
         private TextBox txtMargin;
+        private Label label11;
+        private GroupBox groupBox4;
+        private CheckBox checkBoxShowDollars;
+        private CheckBox checkBoxMustPreview;
+        private Label label7;
+        private TextBox txtBotLabel;
+        private CheckBox checkBoxManageAllPos;
     }
 }
