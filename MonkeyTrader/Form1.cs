@@ -32,9 +32,9 @@ namespace cAlgo
             if (_robot.IsBacktesting)
                 _liveOrBacktesting = " - BACKTEST";
             this.Text += " - " + _robot.Symbol.Name + _robot.Chart.TimeFrame.ToString() + _liveOrBacktesting;
-            txtBotLabel.Text = "MT-" + _robot.Symbol.Name + "-001";
-            nudMaxRisk.Value = 1.0M;
-            this.cboxTrailMethod.Text = _trailValues[0];
+            txtBotLabel.Text = "Monkey_" + _robot.Symbol.Name + "_" + _robot.Chart.TimeFrame.ShortName + "_001";
+            nudMaxRisk.Value = 0.1M;
+            this.cboxTrailMethod.Text = _trailValues[1];
             checkBoxManageAllPos.Checked = _robot.ManageAllPos;
             checkBoxMustPreview.Checked = _robot.MustPreview;
             checkBoxShowDollars.Checked = _robot.ShowDollars;
@@ -53,6 +53,7 @@ namespace cAlgo
             nudSL.Value = Math.Max(nudSL.Minimum, (decimal)Math.Ceiling(Math.Abs(_robot.Chart.Bars.HighPrices.Maximum(10) - _robot.Chart.Bars.LowPrices.Minimum(10)) / _robot.Symbol.PipSize));
             nudTPStep.Value = nudSL.Value;
             nubBEAfter.Value = Math.Max(nubBEAfter.Minimum, (decimal)Math.Round(nudSL.Value / 2, 1));
+            nubTrailAfter.Value = (decimal) ((double) nubBEAfter.Value * 1.5);
             double spreadPips = _robot.Symbol.Spread / _robot.Symbol.PipSize;
             if (spreadPips > 1)
                 nudPipsPadding.Value = (decimal)Math.Ceiling(spreadPips * 1.25);
@@ -296,6 +297,8 @@ namespace cAlgo
                         {
                             newSL = position.EntryPrice - (stopLossPips * _robot.Symbol.PipSize);
                         }
+                        if (position.HasTrailingStop)
+                            position.ModifyTrailingStop(false);
                         _robot.ModifyPositionAsync(position, newSL, position.TakeProfit);
                     }
                 };
@@ -345,7 +348,7 @@ namespace cAlgo
                     trailType = Robots.MonkeyTrader.TrailType.EMA200;
                     break;
             }
-            bool trailAfterBE = checkBoxTrailAfterBreakEven.Checked;
+            bool trailAfterBE = checkBoxTrailAfter.Checked;
             _robot.BeginInvokeOnMainThread(() => { _robot.SetTrail(trailType, candlestoTrail, trailAfterBE); });
             refreshBreakEven();
         }

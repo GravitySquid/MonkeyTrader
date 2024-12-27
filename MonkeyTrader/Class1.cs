@@ -30,7 +30,7 @@ namespace cAlgo.Robots
     public class MonkeyTrader : Robot
     {
 
-        [Parameter("Manage All Positions", DefaultValue = true, Group = "General Settings")]
+        [Parameter("Manage All Positions", DefaultValue = false, Group = "General Settings")]
         public bool ManageAllPos { get; set; }
 
         [Parameter("Preview before Trade", DefaultValue = false, Group = "General Settings")]
@@ -45,10 +45,10 @@ namespace cAlgo.Robots
         [Parameter("Account Margin Warning Level", DefaultValue = 1000.0, Group = "General Settings")]
         public double MarginWarningLevel { get; set; }
 
-        [Parameter("Max Risk %", DefaultValue = 1.00, MinValue = 0.01, Group = "Positions")]
+        [Parameter("Max Risk %", DefaultValue = 0.10, MinValue = 0.01, Group = "Positions")]
         public double MaxRisk { get; set; }
 
-        [Parameter("Max Volume", DefaultValue = 1, MinValue = 1, Group = "Positions")]
+        [Parameter("Max Volume", DefaultValue = 10000, MinValue = 1, Group = "Positions")]
         public int MaxVolume { get; set; }
 
         [Parameter("Number of Positions", DefaultValue = 1, MinValue = 1, Group = "Positions")]
@@ -66,7 +66,7 @@ namespace cAlgo.Robots
 
         private Form1 _mainForm;
         private int _candlesToTrail = 3;
-        private bool _trailOnlyAfterBE = false;
+        private bool _trailAfterBE = false;
         private ParabolicSAR _sar;
         private double _minAF = 0.02, _maxAF = 0.2;
         private TrailType _trailType = TrailType.None;
@@ -77,7 +77,7 @@ namespace cAlgo.Robots
         private ExponentialMovingAverage _EMA13, _EMA20, _EMA50, _EMA100, _EMA200;
 
         public string BotVersion = "";
-        public const string Expirydate = "1/12/2024";
+        public const string Expirydate = "1/12/2026";
 
         public enum TrailType
         {
@@ -142,6 +142,7 @@ namespace cAlgo.Robots
             double tpPips = (double)((NumericUpDown)_mainForm.Controls.Find("nudTPStep", true)[0]).Value;
             double paddingPipsBE = (double)((NumericUpDown)_mainForm.Controls.Find("nudPipsPadding", true)[0]).Value;
             double paddingPipsTrail = (double)((NumericUpDown)_mainForm.Controls.Find("nudTrailPaddingPips", true)[0]).Value;
+            double trailAfterPips = (double)((NumericUpDown)_mainForm.Controls.Find("nubTrailAfter", true)[0]).Value;
             double breakEvenAfter = (double)((NumericUpDown)_mainForm.Controls.Find("nubBEAfter", true)[0]).Value;
             double closeOnGainPerc = (double)((NumericUpDown)_mainForm.Controls.Find("nudCloseOnGainPerc", true)[0]).Value;
             System.Windows.Forms.CheckBox check = (System.Windows.Forms.CheckBox)_mainForm.Controls.Find("checkBoxManageAllPos", true)[0];
@@ -178,14 +179,14 @@ namespace cAlgo.Robots
                             break;
                         case TrailType.Regular:
                             if (p.HasTrailingStop == false)
-                                if ((!_trailOnlyAfterBE) || p.Pips > breakEvenAfter)
+                                if ((_trailAfterBE) && p.Pips > trailAfterPips)
                                     p.ModifyTrailingStop(true);
                             break;
                         case TrailType.SAR:
-                            UpdateTrail(p, _sar.Result.LastValue, _sar.Result.LastValue, paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, _sar.Result.LastValue, _sar.Result.LastValue, paddingPipsTrail, true, trailAfterPips);
                             break;
                         case TrailType.Candle:
-                            UpdateTrail(p, Bars.LowPrices.Minimum(_candlesToTrail), Bars.HighPrices.Maximum(_candlesToTrail), paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, Bars.LowPrices.Minimum(_candlesToTrail), Bars.HighPrices.Maximum(_candlesToTrail), paddingPipsTrail, true, trailAfterPips);
                             break;
                         case TrailType.TargetStep:
                             if (p.HasTrailingStop == true)
@@ -215,19 +216,19 @@ namespace cAlgo.Robots
                             }
                             break;
                         case TrailType.EMA13:
-                            UpdateTrail(p, _EMA13.Result.LastValue, _EMA13.Result.LastValue, paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, _EMA13.Result.LastValue, _EMA13.Result.LastValue, paddingPipsTrail, true, trailAfterPips);
                             break;
                         case TrailType.EMA20:
-                            UpdateTrail(p, _EMA20.Result.LastValue, _EMA20.Result.LastValue, paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, _EMA20.Result.LastValue, _EMA20.Result.LastValue, paddingPipsTrail, true, trailAfterPips);
                             break;
                         case TrailType.EMA50:
-                            UpdateTrail(p, _EMA50.Result.LastValue, _EMA50.Result.LastValue, paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, _EMA50.Result.LastValue, _EMA50.Result.LastValue, paddingPipsTrail, true, trailAfterPips);
                             break;
                         case TrailType.EMA100:
-                            UpdateTrail(p, _EMA100.Result.LastValue, _EMA100.Result.LastValue, paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, _EMA100.Result.LastValue, _EMA100.Result.LastValue, paddingPipsTrail, true, trailAfterPips);
                             break;
                         case TrailType.EMA200:
-                            UpdateTrail(p, _EMA200.Result.LastValue, _EMA200.Result.LastValue, paddingPipsTrail, true, breakEvenAfter);
+                            UpdateTrail(p, _EMA200.Result.LastValue, _EMA200.Result.LastValue, paddingPipsTrail, true, trailAfterPips);
                             break;
                     }
                     // Check if past BE
@@ -294,11 +295,11 @@ namespace cAlgo.Robots
 
         }
 
-        private void UpdateTrail(Position pos, double lastValueBuy, double lastValueSell, double paddingPips, bool addSpread, double breakEvenAfter)
+        private void UpdateTrail(Position pos, double lastValueBuy, double lastValueSell, double paddingPips, bool addSpread, double trailAfterPips)
         {
             if (pos.HasTrailingStop == true)
                 pos.ModifyTrailingStop(false);
-            if ((!_trailOnlyAfterBE) || (_autoBreakEven && pos.Pips > breakEvenAfter))
+            if ((_trailAfterBE && _autoBreakEven && pos.Pips > trailAfterPips))
             {
                 if (pos.TradeType == TradeType.Buy)
                 {
@@ -319,7 +320,7 @@ namespace cAlgo.Robots
         {
             _trailType = trailType;
             _candlesToTrail = candlesToTrail;
-            _trailOnlyAfterBE = trailAfterBE;
+            _trailAfterBE = trailAfterBE;
         }
 
         public void SetBreakEvenMode(bool autoBreakEven)

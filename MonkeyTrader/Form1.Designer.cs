@@ -43,7 +43,8 @@
             label3 = new Label();
             nudMaxRisk = new NumericUpDown();
             groupBox2 = new GroupBox();
-            checkBoxTrailAfterBreakEven = new CheckBox();
+            nubTrailAfter = new NumericUpDown();
+            checkBoxTrailAfter = new CheckBox();
             nudTrailPaddingPips = new NumericUpDown();
             label9 = new Label();
             nudCandleTrail = new NumericUpDown();
@@ -90,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)nudSL).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudMaxRisk).BeginInit();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nubTrailAfter).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudTrailPaddingPips).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudCandleTrail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nubBEAfter).BeginInit();
@@ -265,7 +267,8 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(checkBoxTrailAfterBreakEven);
+            groupBox2.Controls.Add(nubTrailAfter);
+            groupBox2.Controls.Add(checkBoxTrailAfter);
             groupBox2.Controls.Add(nudTrailPaddingPips);
             groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(nudCandleTrail);
@@ -285,16 +288,30 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Break Even + Trail";
             // 
-            // checkBoxTrailAfterBreakEven
+            // nubTrailAfter
             // 
-            checkBoxTrailAfterBreakEven.Checked = true;
-            checkBoxTrailAfterBreakEven.CheckState = CheckState.Checked;
-            checkBoxTrailAfterBreakEven.Location = new Point(9, 83);
-            checkBoxTrailAfterBreakEven.Name = "checkBoxTrailAfterBreakEven";
-            checkBoxTrailAfterBreakEven.Size = new Size(154, 20);
-            checkBoxTrailAfterBreakEven.TabIndex = 11;
-            checkBoxTrailAfterBreakEven.Text = "Only Trail after BE";
-            checkBoxTrailAfterBreakEven.CheckedChanged += checkBoxTrailAfterBreakEven_CheckedChanged_1;
+            nubTrailAfter.DecimalPlaces = 1;
+            nubTrailAfter.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            nubTrailAfter.Location = new Point(106, 83);
+            nubTrailAfter.Margin = new Padding(3, 2, 3, 2);
+            nubTrailAfter.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+            nubTrailAfter.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nubTrailAfter.Name = "nubTrailAfter";
+            nubTrailAfter.Size = new Size(66, 25);
+            nubTrailAfter.TabIndex = 16;
+            nubTrailAfter.TextAlign = HorizontalAlignment.Right;
+            nubTrailAfter.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // checkBoxTrailAfter
+            // 
+            checkBoxTrailAfter.Checked = true;
+            checkBoxTrailAfter.CheckState = CheckState.Checked;
+            checkBoxTrailAfter.Location = new Point(9, 83);
+            checkBoxTrailAfter.Name = "checkBoxTrailAfter";
+            checkBoxTrailAfter.Size = new Size(101, 20);
+            checkBoxTrailAfter.TabIndex = 11;
+            checkBoxTrailAfter.Text = "Trail past";
+            checkBoxTrailAfter.CheckedChanged += checkBoxTrailAfterBreakEven_CheckedChanged_1;
             // 
             // nudTrailPaddingPips
             // 
@@ -633,10 +650,10 @@
             // tabPage2
             // 
             tabPage2.Controls.Add(groupBox4);
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 26);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(382, 448);
+            tabPage2.Size = new Size(382, 446);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
             tabPage2.UseVisualStyleBackColor = true;
@@ -685,13 +702,11 @@
             txtBotLabel.Location = new Point(83, 28);
             txtBotLabel.Margin = new Padding(3, 2, 3, 2);
             txtBotLabel.Name = "txtBotLabel";
-            txtBotLabel.Size = new Size(117, 25);
+            txtBotLabel.Size = new Size(281, 25);
             txtBotLabel.TabIndex = 5;
             // 
             // checkBoxManageAllPos
             // 
-            checkBoxManageAllPos.Checked = true;
-            checkBoxManageAllPos.CheckState = CheckState.Checked;
             checkBoxManageAllPos.Location = new Point(6, 61);
             checkBoxManageAllPos.Name = "checkBoxManageAllPos";
             checkBoxManageAllPos.Size = new Size(234, 20);
@@ -776,6 +791,7 @@
             ((System.ComponentModel.ISupportInitialize)nudMaxRisk).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nubTrailAfter).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudTrailPaddingPips).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCandleTrail).EndInit();
             ((System.ComponentModel.ISupportInitialize)nubBEAfter).EndInit();
@@ -832,7 +848,7 @@
         private ComboBox cboxTrailMethod;
         private Label label9;
         private NumericUpDown nudCandleTrail;
-        private CheckBox checkBoxTrailAfterBreakEven;
+        private CheckBox checkBoxTrailAfter;
         private CheckBox checkBoxAutoBreakEven;
         private TabPage tabPage3;
         private GroupBox groupBox7;
@@ -852,5 +868,6 @@
         private Label label7;
         private TextBox txtBotLabel;
         private CheckBox checkBoxManageAllPos;
+        private NumericUpDown nubTrailAfter;
     }
 }
